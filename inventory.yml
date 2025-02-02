@@ -3,24 +3,23 @@ k3s_cluster:
   children:
     server:
       hosts:
-        192.16.35.11:
+        tweaktop.local:
     agent:
       hosts:
-        192.16.35.12:
-        192.16.35.13:
+        geekpi.local:
 
   # Required Vars
   vars:
     ansible_port: 22
-    ansible_user: debian
-    k3s_version: v1.30.2+k3s1
+    ansible_user: ansible
+    k3s_version: v1.31.4+k3s1
     # The token should be a random string of reasonable length. You can generate
     # one with the following commands:
     # - openssl rand -base64 64
     # - pwgen -s 64 1
     # You can use ansible-vault to encrypt this value / keep it secret.
     # Or you can omit it if not using Vagrant and let the first server automatically generate one.
-    token: "changeme!"
+    # token: "changeme!"
     api_endpoint: "{{ hostvars[groups['server'][0]]['ansible_host'] | default(groups['server'][0]) }}"
 
     # Optional vars
